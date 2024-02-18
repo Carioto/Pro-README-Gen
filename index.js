@@ -9,7 +9,7 @@ const questions = [
         message: "What is the name of your project?",
       },
     {
-        type: 'editor',
+        type: 'input',
         name: 'projDesc',
         message: "Please give a short description of your project:",
       },
@@ -29,31 +29,68 @@ const questions = [
         message: "Who contributed to the project?",
       },
     {
-        type: 'input',
-        name: 'projLic',
+        type: 'list',
+        name: 'license',
         message: "What license are your using for the project?",
+        choices: [
+            {
+                name:'GNU',
+            },
+            {
+                name:'Mozilla',
+            },
+            {
+                name:'Apache',
+            },
+            {
+                name:'MIT',
+            },
+            {
+                name:'Boost',
+            },
+            {
+                name:'Unlicense',
+            }
+        ]
       },
     {
         type: 'input',
         name: 'projTest',
         message: "What test data do you offer?",
       },
-      {
+    {
         type: 'input',
-        name: 'projContact',
-        message: "How's does someone contact you with question?",
+        name: 'usernameGitHub',
+        message: "What is your GitHub username?",
+      },
+    {
+        type: 'input',
+        name: 'userEmail',
+        message: "What is your email address?",
       },
 ];
 
 
 // TODO: Create a function to write README file
-// function writeToFile(fileName, data) {}
+function writeToFile(filename, data) {
+    fs.writeFile(filename, data, err => err ? console.error(err) : console.log('Thanks for using my README file generator.  Your file is created is the COMPLETE directory.'));
+}
 
-// TODO: Create a function to initialize app
+// writeToFile();
+
 function init() {
-inquirer.prompt(questions).then((answers) => {
-          console.log(JSON.stringify(answers))
-})};
+ inquirer.prompt(questions).then((answers) => {
+        const data = answers;
+       const fileData = generateMarkdown(data);
+        writeToFile("./complete/README.md", fileData);
+    })};
 
-// Function call to initialize app
 init();
+        
+        
+        
+        
+        
+        // TODO: Create a function to initialize app
+        // Function call to initialize app
+        
