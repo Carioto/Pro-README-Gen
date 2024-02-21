@@ -1,46 +1,37 @@
-// TODO: Create a function that returns a license badge based on which license is passed in
-// If there is no license, return an empty string
+//NOTE the user must pick a license to procede 
 function renderLicenseBadge(data) {
     return `![License:${data.license}](https://img.shields.io/badge/License-${data.license}-blue)`
-}
-
-  
-
-// TODO: Create a function that returns the license link
-// If there is no license, return an empty string
-function renderLicenseLink(license) {}
-
-// TODO: Create a function that returns the license section of README
-// If there is no license, return an empty string
-function renderLicenseSection(data) {
-  switch (data.license) {
-    case 'GNU':
-      return `This software is covered under the following license
-      GNU General Public License version 3
-      [View license](https://opensource.org/license/gpl-3-0/)`;
-    case 'Apache':
-      return`Apache License, Version 2.0
-      [View license](https://opensource.org/license/apache-2-0/)`;
-    case 'Mozilla':
-      return `Mozilla Public License 2.0
-      [View license](https://opensource.org/license/mpl-2-0/)`;
-    case 'MIT':
-      return`MIT No Attribution License
-      [View license](https://opensource.org/license/mit-0/)`;
-    case 'Boost':
-      return`Boost Software License 1.0
-      [View license](https://opensource.org/license/bsl-1-0/)`;
-    case 'Unlicense':
-      return`The Unlicense
-       [View license](https://opensource.org/license/unlicense/)`;
   }
-}
-
-
-// TODO: Create a function to generate markdown for README
-function generateMarkdown(data) {
- const badge =  renderLicenseBadge(data);
- const liceLink = renderLicenseSection(data);
+  
+  function renderLicenseSection(data) {
+    switch (data.license) {
+      case 'GNU':
+        return `GNU General Public License version 3 
+        [View license](https://opensource.org/license/gpl-3-0)`;
+      case 'Apache':
+        return`Apache License, Version 2.0
+        [View license](https://opensource.org/license/apache-2-0/)`;
+      case 'Mozilla':
+        return `Mozilla Public License 2.0
+        [View license](https://opensource.org/license/mpl-2-0/)`;
+      case 'MIT':
+        return`MIT No Attribution License
+        [View license](https://opensource.org/license/mit-0/)`;
+      case 'Boost':
+        return`Boost Software License 1.0
+        [View license](https://opensource.org/license/bsl-1-0/)`;
+      case 'Unlicense':
+        return`[View license](https://opensource.org/license/unlicense/)`;
+      }
+    }
+              
+// Begin construction 
+function generateMarkdown(data) {              
+//Create a badge from the input of the user.  
+const badge =  renderLicenseBadge(data);
+//Create link to selected license's webpage 
+const liceLink = renderLicenseSection(data);
+//Build the README file
   return `# ${data.projTitle}
 ${badge}
 
@@ -65,14 +56,14 @@ ${data.projInstall}
 
 ${data.projUsage}
 
+## License
+
+This software is covered under the following license:
+${liceLink}
+
 ## Credits
 
 ${data.projCredits}
-
-## License
-
-${liceLink}
-
 
 ## Tests
 
@@ -81,10 +72,11 @@ ${data.projTest}
 ## Questions
 
 Contact me by email at ${data.userEmail}\n
-or visit my GitHub repository: [${data.usernameGitHub}](https://github.com/${data.usernameGitHub})
+or visit my GitHub repository: [github.com/${data.usernameGitHub}](https://github.com/${data.usernameGitHub})
 `;
 }
 
+//allow generateMarkdown to be accessed by index.js
 module.exports = 
 generateMarkdown;
 

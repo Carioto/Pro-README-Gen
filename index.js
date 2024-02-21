@@ -1,7 +1,9 @@
+// external dependencies
 const fs = require('fs');
 const inquirer = require('inquirer');
 const generateMarkdown = require('./utils/generateMarkdown.js');
 
+// questions to user
 const questions = [
     {
         type: 'input',
@@ -70,27 +72,19 @@ const questions = [
       },
 ];
 
-
-// TODO: Create a function to write README file
+// function to write file to file system
 function writeToFile(filename, data) {
-    fs.writeFile(filename, data, err => err ? console.error(err) : console.log('Thanks for using my README file generator.  Your file is created is the COMPLETE directory.'));
+    fs.writeFile(filename, data, err => err ? console.error(err) : console.log('Thanks for using my README file generator.  Your file is created in the COMPLETE directory.'));
 }
-
-// writeToFile();
-
+// present questions to user ...
 function init() {
  inquirer.prompt(questions).then((answers) => {
         const data = answers;
+// ... then run function to generate the README file from the answers ...
        const fileData = generateMarkdown(data);
+// ... then run function to write the file to the users local file system.
         writeToFile("./complete/README.md", fileData);
     })};
 
+// begin here   
 init();
-        
-        
-        
-        
-        
-        // TODO: Create a function to initialize app
-        // Function call to initialize app
-        
